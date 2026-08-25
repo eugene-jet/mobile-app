@@ -20,7 +20,7 @@ It covers foundations and base components — no product screens yet.
 | Themes | Light and dark, designed together |
 | Breakpoints | 375 (mobile) · 768 (tablet) · 1440 (wide) |
 | Platforms | One component set for iOS, Android and web |
-| Typeface | Nunito |
+| Typeface | Inter |
 | Icons | [Lucide](https://lucide.dev) (ISC) |
 | Accessibility | WCAG 2.1 AA — every foreground/background pair verified |
 
