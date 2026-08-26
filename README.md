@@ -52,15 +52,16 @@ shadow/        elevation levels
 | Token | Value | Used for |
 |---|---|---|
 | `radius.none` | 0px | Full-bleed surfaces, dividers |
-| `radius.sm` | 8px | Buttons and other controls (inputs, chips, segmented controls) |
+| `radius.sm` | 8px | Buttons, inputs, selects, segmented controls |
 | `radius.md` | 12px | Cards, list rows |
 | `radius.lg` | 16px | Sheets, modals |
 | `radius.xl` | 24px | Large containers, onboarding panels |
 | `radius.2xl` | 32px | Hero and cover surfaces |
-| `radius.full` | 9999px | Pills, avatars, icon-only round buttons |
+| `radius.full` | 9999px | Pills (Chip, Badge), avatars, progress tracks |
 
 Buttons share a single radius across all sizes, so a small and a large button read as
-the same family. Icon-only round buttons are the one exception and use `radius.full`.
+the same family. The focus ring sits 4px outside the button and uses `radius.md` (12px)
+to stay concentric with it. Chip and Badge are the only fully pill-shaped controls.
 
 Semantic colours are aliases, so a theme is a single lookup table:
 
