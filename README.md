@@ -38,7 +38,7 @@ variables, in [W3C Design Tokens](https://tr.designtokens.org/format/) draft for
 primitive/     raw colour ramps — never referenced directly by UI code
 color/         light and dark semantic colours, aliased to primitives
 spacing/       4px-grid spacing scale
-radius/        corner radii
+radius/        corner radii — buttons and other controls use radius.sm (8px)
 size/          icon, avatar and control sizes (touch-min = 44px)
 stroke/        border widths
 layout/        responsive values, one group per breakpoint
@@ -46,6 +46,21 @@ font/          families, weights, sizes, line heights
 typography/    composite text styles
 shadow/        elevation levels
 ```
+
+### Corner radii
+
+| Token | Value | Used for |
+|---|---|---|
+| `radius.none` | 0px | Full-bleed surfaces, dividers |
+| `radius.sm` | 8px | Buttons and other controls (inputs, chips, segmented controls) |
+| `radius.md` | 12px | Cards, list rows |
+| `radius.lg` | 16px | Sheets, modals |
+| `radius.xl` | 24px | Large containers, onboarding panels |
+| `radius.2xl` | 32px | Hero and cover surfaces |
+| `radius.full` | 9999px | Pills, avatars, icon-only round buttons |
+
+Buttons share a single radius across all sizes, so a small and a large button read as
+the same family. Icon-only round buttons are the one exception and use `radius.full`.
 
 Semantic colours are aliases, so a theme is a single lookup table:
 
