@@ -38,7 +38,7 @@ variables, in [W3C Design Tokens](https://tr.designtokens.org/format/) draft for
 primitive/     raw colour ramps — never referenced directly by UI code
 color/         light and dark semantic colours, aliased to primitives
 spacing/       4px-grid spacing scale
-radius/        corner radii — buttons and other controls use radius.sm (8px)
+radius/        corner radii — buttons use radius.sm (8px), fields radius.md (12px)
 size/          icon, avatar and control sizes (touch-min = 44px)
 stroke/        border widths
 layout/        responsive values, one group per breakpoint
@@ -49,19 +49,26 @@ shadow/        elevation levels
 
 ### Corner radii
 
+Every row below is the radius the Figma component library actually binds, not an
+intent — the components are the source of truth for this mapping.
+
 | Token | Value | Used for |
 |---|---|---|
-| `radius.none` | 0px | Full-bleed surfaces, dividers |
-| `radius.sm` | 8px | Buttons, inputs, selects, segmented controls |
-| `radius.md` | 12px | Cards, list rows |
-| `radius.lg` | 16px | Sheets, modals |
-| `radius.xl` | 24px | Large containers, onboarding panels |
-| `radius.2xl` | 32px | Hero and cover surfaces |
-| `radius.full` | 9999px | Pills (Chip, Badge), avatars, progress tracks |
+| `radius.none` | 0px | Full-bleed surfaces — List Row, Top App Bar, dividers |
+| `radius.sm` | 8px | Button (all 48 variants), Skeleton line |
+| `radius.md` | 12px | Text Field, Select, Textarea, Side Nav Item, List Row thumbnail, the button focus ring |
+| `radius.lg` | 16px | Card, Collectible Card, Toast, Skeleton block |
+| `radius.xl` | 24px | Bottom Sheet, Dialog |
+| `radius.2xl` | 32px | Reserved — no component uses it yet |
+| `radius.full` | 9999px | Chip, Badge, Avatar, progress track and fill, Skeleton circle |
 
 Buttons share a single radius across all sizes, so a small and a large button read as
 the same family. The focus ring sits 4px outside the button and uses `radius.md` (12px)
 to stay concentric with it. Chip and Badge are the only fully pill-shaped controls.
+
+Controls and containers deliberately sit on different steps: a button is 8px, the
+field it sits next to is 12px, and the card holding both is 16px, so nesting reads as
+three distinct levels rather than one repeated shape.
 
 Semantic colours are aliases, so a theme is a single lookup table:
 
