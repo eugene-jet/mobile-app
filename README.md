@@ -12,10 +12,11 @@ exported straight from Figma as W3C design tokens.**
 
 [**▶ Live styleboard**](https://eugene-jet.github.io/mobile-app/) · [Figma file](https://www.figma.com/design/kbZ39m2G2qM7misMz37XF6) · [Product concept](idea.md)
 
-[![Surprise Collector design system styleboard — brand and neutral ramps, collection semantics, type scale, corner radii and a light/dark collectible card](docs/styleboard.png)](https://eugene-jet.github.io/mobile-app/)
+[![Surprise Collector — a design-token foundation: the indigo brand ramp with rarity and collection-state semantics, exported from Figma](docs/hero.png)](https://eugene-jet.github.io/mobile-app/)
 
-> The image above is a styleboard rendered directly from [`tokens.json`](tokens.json).
-> It is also served live at **<https://eugene-jet.github.io/mobile-app/>**.
+> **[▶ Explore the full styleboard](https://eugene-jet.github.io/mobile-app/)** — every ramp, the
+> collection semantics, the type scale, corner radii, spacing, elevation and a light/dark
+> collectible card, all rendered from [`tokens.json`](tokens.json).
 
 This repository is the **design output** for the product, not the app itself.
 There is no application code yet: it holds the product concept and a Figma-sourced

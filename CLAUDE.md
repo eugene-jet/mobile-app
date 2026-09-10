@@ -15,7 +15,8 @@ concept and the design system output:
 | `README.md` | Design system overview — token groups, the corner radius map, how to consume `tokens.json` |
 | `idea.md` | Product concept and planned MVP scope (written in Ukrainian) |
 | `tokens.json` | 334 design tokens exported from Figma, W3C Design Tokens (DTCG) draft format |
-| `docs/index.html` | Static styleboard rendered from the token values; published via GitHub Pages and screenshotted into the README as `docs/styleboard.png`. Hand-authored, so update it when the tokens it mirrors change. |
+| `docs/index.html` | Full static styleboard rendered from the token values; published via GitHub Pages. Hand-authored, so update it when the tokens it mirrors change. |
+| `docs/hero.html` | Compact hero banner; screenshotted into the README as `docs/hero.png`. Hand-authored — keep it in step with the tokens too. |
 
 MVP scope, per `idea.md`: catalogue + my collection + wishlist. Trading,
 selling and community features are explicitly out of scope for the first stage.
