@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surprise Collector — hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1200px;height:520px}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#FAF8F6;color:#211D1A;
+    display:flex;gap:40px;align-items:center;padding:48px 56px;overflow:hidden;-webkit-font-smoothing:antialiased}
+  .left{flex:1.25;min-width:0}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#0E4BE0;
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
+  .kicker .dot{width:10px;height:10px;border-radius:9999px;background:#0E4BE0;box-shadow:0 0 0 4px #E1ECFF}
+  h1{font-weight:800;font-size:44px;line-height:48px;letter-spacing:-.8px;margin-bottom:16px}
+  .lede{font-size:18px;line-height:26px;color:#5F5751;max-width:46ch;margin-bottom:24px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:12px;font-weight:600;letter-spacing:.2px;padding:7px 13px;border-radius:9999px;
+    background:#F4F1ED;color:#5F5751;border:1px solid #E8E3DD;white-space:nowrap}
+  .chip.brand{background:#F0F5FF;color:#0A3CB7;border-color:#C4D8FF}
+
+  .panel{flex:1;background:#FFFFFF;border:1px solid #E8E3DD;border-radius:24px;padding:24px;
+    box-shadow:0 8px 16px -4px rgba(43,33,26,.12),0 16px 32px -8px rgba(43,33,26,.08)}
+  .plabel{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#7D746C;margin-bottom:10px}
+  .ramp{display:flex;border-radius:12px;overflow:hidden;margin-bottom:22px;box-shadow:0 1px 2px rgba(43,33,26,.06)}
+  .ramp i{flex:1;height:40px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .pills:last-child{margin-bottom:0}
+  .pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:9999px;font-weight:600;font-size:12px;line-height:16px}
+  .pill .d{width:8px;height:8px;border-radius:9999px}
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="kicker"><span class="dot"></span>Design System · v0.1.0</div>
+    <h1>Surprise Collector</h1>
+    <p class="lede">A calm, accessible design-token foundation for a cross-platform tracker for collectors of chocolate-egg toy figures — exported from Figma.</p>
+    <div class="chips">
+      <span class="chip brand">334 tokens</span>
+      <span class="chip">W3C DTCG</span>
+      <span class="chip">Inter</span>
+      <span class="chip">Light + Dark</span>
+      <span class="chip">WCAG 2.1 AA</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="plabel">Brand ramp · indigo</div>
+    <div class="ramp">
+      <i style="background:#F0F5FF"></i><i style="background:#E1ECFF"></i><i style="background:#C4D8FF"></i>
+      <i style="background:#9CBEFF"></i><i style="background:#6F9EFF"></i><i style="background:#3874FE"></i>
+      <i style="background:#0E4BE0"></i><i style="background:#0A3CB7"></i><i style="background:#072F90"></i><i style="background:#06246C"></i>
+    </div>
+    <div class="plabel">Rarity</div>
+    <div class="pills">
+      <span class="pill" style="background:#F4F1ED;color:#5F5751"><span class="d" style="background:#5F5751"></span>Common</span>
+      <span class="pill" style="background:#EFF8FF;color:#175CD3"><span class="d" style="background:#175CD3"></span>Rare</span>
+      <span class="pill" style="background:#FFF9E6;color:#8A6100"><span class="d" style="background:#8A6100"></span>Ultra-rare</span>
+    </div>
+    <div class="plabel">Collection state</div>
+    <div class="pills">
+      <span class="pill" style="background:#ECFDF3;color:#027A48"><span class="d" style="background:#027A48"></span>Owned</span>
+      <span class="pill" style="background:#FFFAEB;color:#B54708"><span class="d" style="background:#B54708"></span>Duplicate</span>
+      <span class="pill" style="background:#F6F1FE;color:#6534C4"><span class="d" style="background:#6534C4"></span>Wanted</span>
+    </div>
+  </div>
+</body>
+</html>
