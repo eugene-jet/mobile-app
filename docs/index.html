@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surprise Collector — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Values below are the exported tokens.json semantics — the styleboard is a
+     read-only preview; Figma + tokens.json remain the source of truth. */
+  :root{
+    --canvas:#FAF8F6; --surface:#FFFFFF; --sunken:#F4F1ED;
+    --text:#211D1A; --text-2:#5F5751; --text-3:#7D746C;
+    --border:#D6CFC7; --border-subtle:#E8E3DD;
+    --brand:#0E4BE0; --brand-700:#0A3CB7; --secondary:#0C8271;
+    --shadow-1:0 1px 2px 0 rgba(43,33,26,.06),0 1px 3px 0 rgba(43,33,26,.04);
+    --shadow-2:0 2px 4px -1px rgba(43,33,26,.08),0 4px 8px -2px rgba(43,33,26,.05);
+    --shadow-3:0 4px 8px -2px rgba(43,33,26,.10),0 8px 16px -4px rgba(43,33,26,.06);
+    --shadow-4:0 8px 16px -4px rgba(43,33,26,.12),0 16px 32px -8px rgba(43,33,26,.08);
+    --font:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--canvas);color:var(--text);font-family:var(--font);
+    font-size:15px;line-height:22px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1120px;margin:0 auto;padding:48px 32px 72px;}
+  a{color:var(--brand-700);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Hero */
+  .hero{display:flex;flex-wrap:wrap;align-items:flex-end;gap:24px;justify-content:space-between;
+    padding-bottom:28px;border-bottom:1.5px solid var(--border);margin-bottom:44px;}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--brand);
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;}
+  .kicker .dot{width:10px;height:10px;border-radius:9999px;background:var(--brand);box-shadow:0 0 0 4px #E1ECFF}
+  h1{font-weight:800;font-size:32px;line-height:40px;letter-spacing:-.5px;margin:0 0 10px;}
+  .lede{font-size:17px;line-height:24px;color:var(--text-2);max-width:52ch;margin:0;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-size:12px;font-weight:600;line-height:16px;letter-spacing:.2px;padding:6px 12px;border-radius:9999px;
+    background:var(--sunken);color:var(--text-2);border:1px solid var(--border-subtle);white-space:nowrap;}
+  .chip.brand{background:#F0F5FF;color:var(--brand-700);border-color:#C4D8FF}
+
+  /* Section scaffolding */
+  section{margin-top:52px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+  .sec-head h2{font-weight:700;font-size:24px;line-height:32px;letter-spacing:-.2px;margin:0}
+  .sec-head p{margin:0;color:var(--text-3);font-size:13px;line-height:18px}
+  .grid{display:grid;gap:16px}
+
+  /* Color ramp */
+  .ramp{display:flex;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-1);border:1px solid var(--border-subtle)}
+  .ramp .stop{flex:1;min-width:0;height:76px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px}
+  .ramp .stop span{font-size:10px;font-weight:600;letter-spacing:.2px}
+  .ramp.small .stop{height:56px}
+  .ramp-label{display:flex;justify-content:space-between;font-size:12px;color:var(--text-3);margin:8px 2px 2px}
+
+  /* Swatch cards */
+  .swatches{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .sw{background:var(--surface);border:1px solid var(--border-subtle);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-1)}
+  .sw .fill{height:52px}
+  .sw .meta{padding:9px 12px}
+  .sw .name{font-size:13px;font-weight:600;line-height:16px}
+  .sw .hex{font-size:12px;color:var(--text-3);font-variant-numeric:tabular-nums;text-transform:uppercase}
+
+  /* Token pills (rarity/state/status) */
+  .pills{display:flex;flex-wrap:wrap;gap:10px}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:9999px;font-weight:600;font-size:13px;line-height:16px;border:1px solid transparent}
+  .pill .d{width:8px;height:8px;border-radius:9999px}
+
+  /* Type scale */
+  .type-row{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px solid var(--border-subtle)}
+  .type-row:last-child{border-bottom:0}
+  .type-tag{flex:0 0 132px;color:var(--text-3);font-size:12px;line-height:16px;font-variant-numeric:tabular-nums}
+  .type-spec{margin-left:auto;flex:0 0 auto;color:var(--text-3);font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* Radius */
+  .radii{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+  .rad{background:var(--surface);border:1px solid var(--border-subtle);border-radius:12px;padding:16px;text-align:center;box-shadow:var(--shadow-1)}
+  .rad .box{height:64px;background:#F0F5FF;border:1.5px solid var(--brand);margin-bottom:12px}
+  .rad .name{font-size:13px;font-weight:600}
+  .rad .val{font-size:12px;color:var(--text-3);font-variant-numeric:tabular-nums}
+  .nest{background:#E1ECFF;padding:16px;border-radius:16px;border:1.5px solid #C4D8FF}
+  .nest .field{background:var(--surface);padding:12px;border-radius:12px;border:1.5px solid var(--border)}
+  .nest .btn{background:var(--brand);color:#fff;padding:12px 16px;border-radius:8px;font-weight:600;font-size:15px;text-align:center}
+  .nest-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--text-3)}
+  .nest-legend b{color:var(--text-2)}
+
+  /* Spacing */
+  .space-row{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+  .space-row .lab{flex:0 0 110px;font-size:12px;color:var(--text-3);font-variant-numeric:tabular-nums}
+  .space-row .bar{height:16px;background:var(--brand);border-radius:4px}
+
+  /* Elevation */
+  .elevs{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .elev{background:var(--surface);border-radius:16px;height:96px;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:600;color:var(--text-2);border:1px solid var(--border-subtle)}
+
+  /* Theme preview cards */
+  .themes{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .theme{border-radius:24px;padding:24px;border:1px solid var(--border-subtle)}
+  .theme.light{background:#FAF8F6}
+  .theme.dark{background:#141110}
+  .theme .tt{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-bottom:16px}
+  .theme.light .tt{color:#7D746C}
+  .theme.dark .tt{color:#B0A79D}
+  /* Collectible card mock */
+  .cc{border-radius:16px;overflow:hidden}
+  .cc.light{background:#FFFFFF;box-shadow:var(--shadow-3)}
+  .cc.dark{background:#211D1A;box-shadow:0 4px 8px -2px rgba(0,0,0,.5),0 8px 16px -4px rgba(0,0,0,.4)}
+  .cc .thumb{height:120px;display:flex;align-items:center;justify-content:center;font-size:40px}
+  .cc.light .thumb{background:linear-gradient(135deg,#F0F5FF,#EDFBF8)}
+  .cc.dark .thumb{background:linear-gradient(135deg,#06246C,#093F38)}
+  .cc .body{padding:16px}
+  .cc .row1{display:flex;gap:8px;margin-bottom:10px}
+  .cc h3{margin:0 0 3px;font-size:17px;font-weight:600;line-height:24px}
+  .cc.light h3{color:#211D1A}.cc.dark h3{color:#FAF8F6}
+  .cc .series{font-size:13px;line-height:18px;margin:0 0 14px}
+  .cc.light .series{color:#5F5751}.cc.dark .series{color:#D6CFC7}
+  .cc .prog{height:8px;border-radius:9999px;overflow:hidden}
+  .cc.light .prog{background:#F4F1ED}.cc.dark .prog{background:#000}
+  .cc .prog i{display:block;height:100%;border-radius:9999px}
+  .cc .pmeta{display:flex;justify-content:space-between;font-size:12px;line-height:16px;margin-top:8px}
+  .cc.light .pmeta{color:#7D746C}.cc.dark .pmeta{color:#B0A79D}
+  .tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:9999px;font-size:12px;font-weight:600;line-height:16px}
+
+  footer{margin-top:64px;padding-top:24px;border-top:1.5px solid var(--border);color:var(--text-3);font-size:13px;line-height:20px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div>
+      <div class="kicker"><span class="dot"></span>Design System · v0.1.0</div>
+      <h1>Surprise Collector</h1>
+      <p class="lede">A calm, accessible foundation for a cross-platform tracker for collectors of chocolate-egg toy figures. Colour, type, space and elevation — exported straight from Figma as W3C design tokens.</p>
+    </div>
+    <div class="chips">
+      <span class="chip brand">334 tokens</span>
+      <span class="chip">W3C DTCG</span>
+      <span class="chip">Inter</span>
+      <span class="chip">Light + Dark</span>
+      <span class="chip">WCAG 2.1 AA</span>
+      <span class="chip">iOS · Android · Web</span>
+    </div>
+  </header>
+
+  <!-- BRAND -->
+  <section>
+    <div class="sec-head"><h2>Brand ramp</h2><p>primitive.indigo · 50 → 900</p></div>
+    <div class="ramp">
+      <div class="stop" style="background:#F0F5FF"><span style="color:#0A3CB7">50</span></div>
+      <div class="stop" style="background:#E1ECFF"><span style="color:#0A3CB7">100</span></div>
+      <div class="stop" style="background:#C4D8FF"><span style="color:#0A3CB7">200</span></div>
+      <div class="stop" style="background:#9CBEFF"><span style="color:#06246C">300</span></div>
+      <div class="stop" style="background:#6F9EFF"><span style="color:#06246C">400</span></div>
+      <div class="stop" style="background:#3874FE"><span style="color:#fff">500</span></div>
+      <div class="stop" style="background:#0E4BE0"><span style="color:#fff">600</span></div>
+      <div class="stop" style="background:#0A3CB7"><span style="color:#fff">700</span></div>
+      <div class="stop" style="background:#072F90"><span style="color:#fff">800</span></div>
+      <div class="stop" style="background:#06246C"><span style="color:#fff">900</span></div>
+    </div>
+    <div class="ramp-label"><span>action.primary = indigo.600</span><span>text.brand = indigo.700</span></div>
+  </section>
+
+  <!-- NEUTRAL -->
+  <section>
+    <div class="sec-head"><h2>Neutral ramp</h2><p>primitive.neutral · a warm grey, 0 → 1000</p></div>
+    <div class="ramp small">
+      <div class="stop" style="background:#FFFFFF;border-right:1px solid #E8E3DD"><span style="color:#7D746C">0</span></div>
+      <div class="stop" style="background:#FAF8F6"><span style="color:#7D746C">50</span></div>
+      <div class="stop" style="background:#F4F1ED"><span style="color:#7D746C">100</span></div>
+      <div class="stop" style="background:#E8E3DD"><span style="color:#5F5751">200</span></div>
+      <div class="stop" style="background:#D6CFC7"><span style="color:#48413C">300</span></div>
+      <div class="stop" style="background:#B0A79D"><span style="color:#211D1A">400</span></div>
+      <div class="stop" style="background:#7D746C"><span style="color:#fff">500</span></div>
+      <div class="stop" style="background:#5F5751"><span style="color:#fff">600</span></div>
+      <div class="stop" style="background:#48413C"><span style="color:#fff">700</span></div>
+      <div class="stop" style="background:#332E2A"><span style="color:#fff">800</span></div>
+      <div class="stop" style="background:#211D1A"><span style="color:#fff">900</span></div>
+      <div class="stop" style="background:#141110"><span style="color:#fff">950</span></div>
+      <div class="stop" style="background:#000000"><span style="color:#fff">1000</span></div>
+    </div>
+  </section>
+
+  <!-- DOMAIN SEMANTICS -->
+  <section>
+    <div class="sec-head"><h2>Collection semantics</h2><p>domain tokens that carry meaning in the product</p></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <div>
+        <div class="type-tag" style="flex:none;margin-bottom:10px;font-weight:600;color:var(--text-2)">Rarity</div>
+        <div class="pills">
+          <span class="pill" style="background:#F4F1ED;color:#5F5751"><span class="d" style="background:#5F5751"></span>Common</span>
+          <span class="pill" style="background:#EFF8FF;color:#175CD3"><span class="d" style="background:#175CD3"></span>Rare</span>
+          <span class="pill" style="background:#FFF9E6;color:#8A6100"><span class="d" style="background:#8A6100"></span>Ultra-rare</span>
+        </div>
+      </div>
+      <div>
+        <div class="type-tag" style="flex:none;margin-bottom:10px;font-weight:600;color:var(--text-2)">Collection state</div>
+        <div class="pills">
+          <span class="pill" style="background:#ECFDF3;color:#027A48"><span class="d" style="background:#027A48"></span>Owned</span>
+          <span class="pill" style="background:#FFFAEB;color:#B54708"><span class="d" style="background:#B54708"></span>Duplicate</span>
+          <span class="pill" style="background:#F6F1FE;color:#6534C4"><span class="d" style="background:#6534C4"></span>Wanted</span>
+        </div>
+      </div>
+      <div>
+        <div class="type-tag" style="flex:none;margin-bottom:10px;font-weight:600;color:var(--text-2)">Status</div>
+        <div class="pills">
+          <span class="pill" style="background:#EFF8FF;color:#175CD3;border-color:#B2DDFF"><span class="d" style="background:#175CD3"></span>Info</span>
+          <span class="pill" style="background:#ECFDF3;color:#027A48;border-color:#A6F4C5"><span class="d" style="background:#027A48"></span>Success</span>
+          <span class="pill" style="background:#FFFAEB;color:#B54708;border-color:#FEDF89"><span class="d" style="background:#B54708"></span>Warning</span>
+          <span class="pill" style="background:#FEF3F2;color:#B42318;border-color:#FECDCA"><span class="d" style="background:#B42318"></span>Danger</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEMANTIC SWATCHES -->
+  <section>
+    <div class="sec-head"><h2>Semantic colour</h2><p>aliases the UI consumes — never the primitives</p></div>
+    <div class="grid swatches">
+      <div class="sw"><div class="fill" style="background:#0E4BE0"></div><div class="meta"><div class="name">action.primary</div><div class="hex">#0E4BE0</div></div></div>
+      <div class="sw"><div class="fill" style="background:#0C8271"></div><div class="meta"><div class="name">action.secondary</div><div class="hex">#0C8271</div></div></div>
+      <div class="sw"><div class="fill" style="background:#FAF8F6;border-bottom:1px solid #E8E3DD"></div><div class="meta"><div class="name">bg.canvas</div><div class="hex">#FAF8F6</div></div></div>
+      <div class="sw"><div class="fill" style="background:#FFFFFF;border-bottom:1px solid #E8E3DD"></div><div class="meta"><div class="name">bg.surface</div><div class="hex">#FFFFFF</div></div></div>
+      <div class="sw"><div class="fill" style="background:#211D1A"></div><div class="meta"><div class="name">text.primary</div><div class="hex">#211D1A</div></div></div>
+      <div class="sw"><div class="fill" style="background:#5F5751"></div><div class="meta"><div class="name">text.secondary</div><div class="hex">#5F5751</div></div></div>
+      <div class="sw"><div class="fill" style="background:#D6CFC7"></div><div class="meta"><div class="name">border.default</div><div class="hex">#D6CFC7</div></div></div>
+      <div class="sw"><div class="fill" style="background:#175CD3"></div><div class="meta"><div class="name">text.link</div><div class="hex">#175CD3</div></div></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section>
+    <div class="sec-head"><h2>Type scale</h2><p>Inter · composite typography styles</p></div>
+    <div class="type-row"><span class="type-tag">display.large</span><span style="font-weight:800;font-size:32px;line-height:40px;letter-spacing:-.5px">Complete the series</span><span class="type-spec">800 · 32/40</span></div>
+    <div class="type-row"><span class="type-tag">heading.h1</span><span style="font-weight:700;font-size:28px;line-height:36px;letter-spacing:-.3px">Complete the series</span><span class="type-spec">700 · 28/36</span></div>
+    <div class="type-row"><span class="type-tag">heading.h2</span><span style="font-weight:700;font-size:24px;line-height:32px;letter-spacing:-.2px">Complete the series</span><span class="type-spec">700 · 24/32</span></div>
+    <div class="type-row"><span class="type-tag">heading.h3</span><span style="font-weight:600;font-size:20px;line-height:28px">Complete the series</span><span class="type-spec">600 · 20/28</span></div>
+    <div class="type-row"><span class="type-tag">body.large</span><span style="font-weight:400;font-size:17px;line-height:24px">Mark the figures you already own.</span><span class="type-spec">400 · 17/24</span></div>
+    <div class="type-row"><span class="type-tag">body.base</span><span style="font-weight:400;font-size:15px;line-height:22px">Mark the figures you already own.</span><span class="type-spec">400 · 15/22</span></div>
+    <div class="type-row"><span class="type-tag">label.base</span><span style="font-weight:600;font-size:13px;line-height:16px;letter-spacing:.2px">MARK AS OWNED</span><span class="type-spec">600 · 13/16</span></div>
+    <div class="type-row"><span class="type-tag">caption</span><span style="font-weight:400;font-size:12px;line-height:16px;letter-spacing:.1px;color:var(--text-3)">Series 4 · 2019 · Italy</span><span class="type-spec">400 · 12/16</span></div>
+  </section>
+
+  <!-- RADIUS -->
+  <section>
+    <div class="sec-head"><h2>Corner radii</h2><p>controls 8 · fields 12 · containers 16 — three readable levels</p></div>
+    <div class="grid radii">
+      <div class="rad"><div class="box" style="border-radius:0"></div><div class="name">none</div><div class="val">0px</div></div>
+      <div class="rad"><div class="box" style="border-radius:8px"></div><div class="name">sm</div><div class="val">8px</div></div>
+      <div class="rad"><div class="box" style="border-radius:12px"></div><div class="name">md</div><div class="val">12px</div></div>
+      <div class="rad"><div class="box" style="border-radius:16px"></div><div class="name">lg</div><div class="val">16px</div></div>
+      <div class="rad"><div class="box" style="border-radius:24px"></div><div class="name">xl</div><div class="val">24px</div></div>
+      <div class="rad"><div class="box" style="border-radius:9999px"></div><div class="name">full</div><div class="val">9999px</div></div>
+    </div>
+    <div style="margin-top:16px;max-width:360px">
+      <div class="nest">
+        <div class="field">
+          <div class="btn">Add to collection</div>
+        </div>
+      </div>
+      <div class="nest-legend"><span><b>card</b> lg · 16px</span><span><b>field</b> md · 12px</span><span><b>button</b> sm · 8px</span></div>
+    </div>
+  </section>
+
+  <!-- SPACING -->
+  <section>
+    <div class="sec-head"><h2>Spacing</h2><p>4px grid</p></div>
+    <div class="space-row"><span class="lab">2xs · 4</span><div class="bar" style="width:4px"></div></div>
+    <div class="space-row"><span class="lab">xs · 8</span><div class="bar" style="width:8px"></div></div>
+    <div class="space-row"><span class="lab">sm · 12</span><div class="bar" style="width:12px"></div></div>
+    <div class="space-row"><span class="lab">md · 16</span><div class="bar" style="width:16px"></div></div>
+    <div class="space-row"><span class="lab">lg · 20</span><div class="bar" style="width:20px"></div></div>
+    <div class="space-row"><span class="lab">xl · 24</span><div class="bar" style="width:24px"></div></div>
+    <div class="space-row"><span class="lab">2xl · 32</span><div class="bar" style="width:32px"></div></div>
+    <div class="space-row"><span class="lab">3xl · 40</span><div class="bar" style="width:40px"></div></div>
+    <div class="space-row"><span class="lab">4xl · 48</span><div class="bar" style="width:48px"></div></div>
+    <div class="space-row"><span class="lab">5xl · 64</span><div class="bar" style="width:64px"></div></div>
+  </section>
+
+  <!-- ELEVATION -->
+  <section>
+    <div class="sec-head"><h2>Elevation</h2><p>four warm-tinted shadow levels</p></div>
+    <div class="grid elevs">
+      <div class="elev" style="box-shadow:var(--shadow-1)">elevation.1</div>
+      <div class="elev" style="box-shadow:var(--shadow-2)">elevation.2</div>
+      <div class="elev" style="box-shadow:var(--shadow-3)">elevation.3</div>
+      <div class="elev" style="box-shadow:var(--shadow-4)">elevation.4</div>
+    </div>
+  </section>
+
+  <!-- THEMES -->
+  <section>
+    <div class="sec-head"><h2>Light &amp; dark, designed together</h2><p>the same semantic tokens, one component set</p></div>
+    <div class="grid themes">
+      <div class="theme light">
+        <div class="tt">Light</div>
+        <div class="cc light">
+          <div class="thumb">🧩</div>
+          <div class="body">
+            <div class="row1">
+              <span class="tag" style="background:#FFF9E6;color:#8A6100">Ultra-rare</span>
+              <span class="tag" style="background:#ECFDF3;color:#027A48">Owned</span>
+            </div>
+            <h3>Hippo Diver</h3>
+            <p class="series">Happy Hippos · Series 4 · 2019</p>
+            <div class="prog"><i style="width:72%;background:#0E4BE0"></i></div>
+            <div class="pmeta"><span>Series progress</span><span>13 / 18</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="theme dark">
+        <div class="tt">Dark</div>
+        <div class="cc dark">
+          <div class="thumb">🧩</div>
+          <div class="body">
+            <div class="row1">
+              <span class="tag" style="background:#573D06;color:#FFCF40">Ultra-rare</span>
+              <span class="tag" style="background:#043D26;color:#6CE9A6">Owned</span>
+            </div>
+            <h3>Hippo Diver</h3>
+            <p class="series">Happy Hippos · Series 4 · 2019</p>
+            <div class="prog"><i style="width:72%;background:#9CBEFF"></i></div>
+            <div class="pmeta"><span>Series progress</span><span>13 / 18</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Surprise Collector — Design System · exported from Figma as W3C design tokens</span>
+    <span>Figma is the source of truth · Inter · Lucide (ISC)</span>
+  </footer>
+
+</div>
+</body>
+</html>
