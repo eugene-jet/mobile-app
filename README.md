@@ -1,11 +1,43 @@
-# mobile-app-kinder
+# Surprise Collector — Design System
 
-A cross-platform collection tracker for people who collect the toy figures from
-chocolate surprise eggs. See [idea.md](idea.md) for the product concept and the
-planned MVP scope.
+**The colour, type, spacing and elevation foundation for a cross-platform app
+that helps people track their collection of chocolate-egg toy figures —
+exported straight from Figma as W3C design tokens.**
+
+![tokens](https://img.shields.io/badge/tokens-334-0E4BE0)
+![format](https://img.shields.io/badge/format-W3C%20DTCG-0C8271)
+![themes](https://img.shields.io/badge/themes-light%20%2B%20dark-211D1A)
+![a11y](https://img.shields.io/badge/a11y-WCAG%202.1%20AA-027A48)
+![platforms](https://img.shields.io/badge/platforms-iOS%20·%20Android%20·%20Web-5F5751)
+
+[**▶ Live styleboard**](https://eugene-jet.github.io/mobile-app/) · [Figma file](https://www.figma.com/design/kbZ39m2G2qM7misMz37XF6) · [Product concept](idea.md)
+
+[![Surprise Collector design system styleboard — brand and neutral ramps, collection semantics, type scale, corner radii and a light/dark collectible card](docs/styleboard.png)](https://eugene-jet.github.io/mobile-app/)
+
+> The image above is a styleboard rendered directly from [`tokens.json`](tokens.json).
+> It is also served live at **<https://eugene-jet.github.io/mobile-app/>**.
+
+This repository is the **design output** for the product, not the app itself.
+There is no application code yet: it holds the product concept and a Figma-sourced
+design system — foundations and base components, no product screens. Figma is the
+source of truth for anything visual; `tokens.json` is its machine-readable export.
 
 Working name: **Surprise Collector**. The app deliberately avoids the Kinder and
 Ferrero trademarks in its name and visual identity.
+
+## What's inside
+
+- **334 design tokens** in [W3C Design Tokens](https://tr.designtokens.org/format/)
+  (DTCG) draft format, exported from Figma.
+- **Light and dark themes**, designed together as one semantic layer over shared
+  primitive ramps.
+- **Collection semantics** — domain tokens the product speaks in: rarity
+  (common / rare / ultra-rare), collection state (owned / duplicate / wanted)
+  and status (info / success / warning / danger).
+- **A full type scale** on Inter, a 4px spacing grid, a seven-step radius scale
+  and four elevation levels.
+- **Accessible by construction** — WCAG 2.1 AA on every foreground/background
+  pair, touch targets at or above 44px.
 
 ## Design system
 
@@ -82,3 +114,23 @@ Semantic colours are aliases, so a theme is a single lookup table:
 Consume it with Style Dictionary or any DTCG-compatible transformer to produce CSS
 custom properties, Kotlin, or Swift. Regenerate it from Figma rather than editing it
 by hand — Figma is the source of truth.
+
+## Status
+
+Design foundations are in place; application development has not started.
+
+- **Done** — colour (light + dark), typography, spacing, radius, elevation and
+  base components in Figma, exported to `tokens.json`.
+- **Planned MVP** (see [idea.md](idea.md)) — catalogue, my collection, wishlist.
+  Trading, selling and community features are explicitly out of scope for the
+  first stage.
+- **Stack** — not chosen yet; React Native and Flutter are the candidates.
+
+## Repository contents
+
+| File | What it is |
+|---|---|
+| [`tokens.json`](tokens.json) | 334 design tokens, W3C DTCG format, exported from Figma |
+| [`docs/index.html`](docs/index.html) | The live styleboard rendered from the tokens |
+| [`idea.md`](idea.md) | Product concept and planned MVP scope (in Ukrainian) |
+| [`CLAUDE.md`](CLAUDE.md) | Working guidance for this repository |
